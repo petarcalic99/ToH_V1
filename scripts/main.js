@@ -1,4 +1,4 @@
-let myImage = document.querySelector('img');
+//let myImage = document.querySelector('img');
 
 //Switch pictures on click
 myImage.onclick = function() {
@@ -19,15 +19,15 @@ function setUserName() {
   if(!myName) {
     setUserName();
   } else {
-    sessionStorage.setItem('name', myName);
+    localStorage.setItem('name', myName);
     myHeading.innerHTML = 'Welcome ' + myName;
   }
 }
  
-if(!sessionStorage.getItem('name')) {
+if(!localStorage.getItem('name')) {
   setUserName();
 } else {
-  let storedName = sessionStorage.getItem('name');
+  let storedName = localStorage.getItem('name');
   myHeading.innerHTML = 'Welcome ' + storedName;
 }
 
