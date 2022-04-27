@@ -23,7 +23,7 @@ function setUserName() {
     myHeading.innerHTML = 'Welcome ' + myName;
   }
 }
-	//Stored name 
+ 
 if(!sessionStorage.getItem('name')) {
   setUserName();
 } else {
