@@ -1,4 +1,4 @@
-//let myImage = document.querySelector('img');
+let myImage = document.querySelector('img');
 
 //Switch pictures on click
 myImage.onclick = function() {

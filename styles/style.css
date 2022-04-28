@@ -1,6 +1,7 @@
 html {
   font-size: 10px;
   font-family: 'Open Sans', sans-serif;
+  background-color: #00539F;
 }
 
 
@@ -25,9 +26,6 @@ b {
   letter-spacing: 1px;
 }
 
-html {
-  background-color: #00539F;
-}
 
 body {
   width: 600px;
@@ -48,9 +46,9 @@ img {
 
 .gallery {
 	display: grid;
-	grid-template-columns: repeat(8,1fr);
-	grid-template-rows: repeat(8,5vw);
-	grid-gap: 15px;
+	grid-template-columns: repeat(3,1fr);
+	grid-template-rows: repeat(3,5fr);
+	grid-gap: 10px;
 }
 .gallery_img {
 	width: 100%;
