@@ -1,4 +1,11 @@
-let myImage = document.querySelector('img');
+let myImages = document.querySelectorAll('.gallery_img');
+let DBSIZE = 20;
+
+myImages.forEach(updateImage);
+
+function updateImage(myImage){
+  myImage.setAttribute ('src','images/MNIST20/0008.png');
+}
 
 //Switch pictures on click
 myImage.onclick = function() {
@@ -6,7 +13,7 @@ myImage.onclick = function() {
   if(mySrc === 'images/eth.jpg') {
     myImage.setAttribute ('src','images/eth.jpg');
   } else {
-    myImage.setAttribute ('src','images/eth.jpg');
+    myImage.setAttribute ('src','images/MNIST20/0008.png');
   }
 }
 
@@ -32,5 +39,15 @@ if(!localStorage.getItem('name')) {
 }
 
 myButton.onclick = function() {
-  setUserName();
+  choosePic();    //setUserName();
 }
+
+// Select ranodm images each time
+window.onload = choosePic;
+
+
+function choosePic() {
+  var randomNum = Math.floor(Math.random() * DBSIZE);
+  document.getElementsByClassName("gallery_img").src = "images/MNIST20/0008.png";
+}
+
