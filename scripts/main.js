@@ -1,26 +1,30 @@
+//Get all images in the grid
 let myImages = document.querySelectorAll('.gallery_img');
-let DBSIZE = 20;
+ // Size of the Image DB used for the test
+let DBSIZE = 20; 
+
+
 //Pour chaque image de la grille, image alea de la BD
 myImages.forEach(updateImage);
 
 function updateImage(myImage){
   var randomNum = Math.floor(Math.random() * DBSIZE);
-  console.log(randomNum);
   let randomNumStr = randomNum.toString();
   let srcIm = 'images/MNIST20/000' + randomNumStr + '.png';
   myImage.setAttribute ('src',srcIm);
 }
-/*
-//Switch pictures on click
-myImage.onclick = function() {
-  let mySrc = myImage.getAttribute('src');
-  if(mySrc === 'images/eth.jpg') {
-    myImage.setAttribute ('src','images/eth.jpg');
-  } else {
-    myImage.setAttribute ('src','images/MNIST20/0008.png');
+
+
+//get pictures src on click
+myImages.forEach(getImgQ);
+
+function getImgQ(MyImage){
+  MyImage.onclick = function getImgSrc(){
+    let ImgSrc = MyImage.getAttribute('src');
+  console.log(ImgSrc);
   }
 }
-*/
+
 
 // Personalized welcome message code
 let myButton = document.querySelector('button');
