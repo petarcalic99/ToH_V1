@@ -46,7 +46,7 @@ if(!localStorage.getItem('name')) {
   let storedName = localStorage.getItem('name');
   myHeading.innerHTML = 'Welcome ' + storedName;
 }
-
+/*
 myButton.onclick = function() {
   choosePic();    //setUserName();
 }
@@ -59,4 +59,4 @@ function choosePic() {
   var randomNum = Math.floor(Math.random() * DBSIZE);
   document.getElementsByClassName("gallery_img").src = "images/MNIST20/0008.png";
 }
-
+*/
