@@ -1,12 +1,16 @@
 let myImages = document.querySelectorAll('.gallery_img');
 let DBSIZE = 20;
-
+//Pour chaque image de la grille, image alea de la BD
 myImages.forEach(updateImage);
 
 function updateImage(myImage){
-  myImage.setAttribute ('src','images/MNIST20/0008.png');
+  var randomNum = Math.floor(Math.random() * DBSIZE);
+  console.log(randomNum);
+  let randomNumStr = randomNum.toString();
+  let srcIm = 'images/MNIST20/000' + randomNumStr + '.png';
+  myImage.setAttribute ('src',srcIm);
 }
-
+/*
 //Switch pictures on click
 myImage.onclick = function() {
   let mySrc = myImage.getAttribute('src');
@@ -16,6 +20,7 @@ myImage.onclick = function() {
     myImage.setAttribute ('src','images/MNIST20/0008.png');
   }
 }
+*/
 
 // Personalized welcome message code
 let myButton = document.querySelector('button');
