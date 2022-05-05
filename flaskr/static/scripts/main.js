@@ -3,6 +3,29 @@ let myImages = document.querySelectorAll('.gallery_img');
  // Size of the Image DB used for the test
 let DBSIZE = 20; 
 
+//check the html loaded
+window.addEventListener('DOMContentLoaded', requestArray);
+// Prepare the arrey to be received
+const myArray;
+
+const myHeaders = new Headers();
+myHeaders.append('Accept', '/ImgArray'); 
+
+const myInit = {
+  method: 'GET',
+  headers: myHeaders,
+  mode: 'cors',  //cross origin resource mode
+  cache: 'default',
+};
+
+const myRequest = new Request('ImgArray');
+fetch(myRequest, myInit)
+  .then((response) => { myArray = response;  })
+
+function requestArray(){
+  console.log("ready!");
+}
+
 
 //Pour chaque image de la grille, image alea de la BD
 myImages.forEach(updateImage);
