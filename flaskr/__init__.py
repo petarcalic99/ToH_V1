@@ -1,7 +1,10 @@
 import os
 
+
 from flask import Flask
 from flask import render_template
+from flask import jsonify
+
 
 def create_app(test_config=None):
     #create and config the app
@@ -27,7 +30,7 @@ def create_app(test_config=None):
     @app.route('/img_array')
     def serveArray():
         a = [1,2,3]
-        return a
+        return jsonify(array=a)
     
     @app.route('/')
     def index():

@@ -23,7 +23,8 @@ window.addEventListener('DOMContentLoaded', requestArray);
 
 function requestArray(){
   fetch(myRequest, myInit)
-  .then( (response) => { myArray = response; } )
+  .then( (response) => { myArray = response; console.log(response); } )
+  console.log(myArray);
 }
 
 
@@ -62,7 +63,7 @@ function setUserName() {
     myHeading.innerHTML = 'Welcome ' + myName;
   }
 }
- 
+
 if(!localStorage.getItem('name')) {
   setUserName();
 } else {
@@ -71,4 +72,4 @@ if(!localStorage.getItem('name')) {
 }
 
 
-console.log(myArray);
+
