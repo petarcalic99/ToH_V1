@@ -23,6 +23,12 @@ def create_app(test_config=None):
         pass
 
     #routing
+
+    @app.route('/img_array')
+    def serveArray():
+        a = [1,2,3]
+        return a
+    
     @app.route('/')
     def index():
         return render_template("index.html")

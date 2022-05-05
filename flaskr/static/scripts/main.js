@@ -3,27 +3,27 @@ let myImages = document.querySelectorAll('.gallery_img');
  // Size of the Image DB used for the test
 let DBSIZE = 20; 
 
-//check the html loaded
-window.addEventListener('DOMContentLoaded', requestArray);
 // Prepare the arrey to be received
-const myArray;
+let myArray;
 
 const myHeaders = new Headers();
-myHeaders.append('Accept', '/ImgArray'); 
+myHeaders.append('Accept', '/img_array'); 
 
 const myInit = {
   method: 'GET',
   headers: myHeaders,
   mode: 'cors',  //cross origin resource mode
-  cache: 'default',
+  cache: 'default',   //idk
 };
 
-const myRequest = new Request('ImgArray');
-fetch(myRequest, myInit)
-  .then((response) => { myArray = response;  })
+const myRequest = new Request('img_array');
+
+//check the html loaded
+window.addEventListener('DOMContentLoaded', requestArray);
 
 function requestArray(){
-  console.log("ready!");
+  fetch(myRequest, myInit)
+  .then( (response) => { myArray = response; } )
 }
 
 
@@ -69,3 +69,6 @@ if(!localStorage.getItem('name')) {
   let storedName = localStorage.getItem('name');
   myHeading.innerHTML = 'Welcome ' + storedName;
 }
+
+
+console.log(myArray);
