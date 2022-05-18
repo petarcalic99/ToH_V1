@@ -3,11 +3,10 @@ let myImages = document.querySelectorAll('.gallery_img');
  // Size of the Image DB used for the test
 let DBSIZE = 20; 
 
-// Prepare the arrey to be received
-let myArray;
-
 const myHeaders = new Headers();
 myHeaders.append('Accept', '/img_array'); 
+
+let myArray;
 
 const myInit = {
   method: 'GET',
@@ -22,10 +21,21 @@ const myRequest = new Request('img_array');
 window.addEventListener('DOMContentLoaded', requestArray);
 
 function requestArray(){
-  fetch(myRequest, myInit)
-  .then( (response) => { myArray = response; console.log(response); } )
-  console.log(myArray);
-}
+  myArray = fetch(myRequest, myInit)
+  .then((response) => response.json())
+  .then((a) => {
+    return a.myArray;
+});  
+};
+
+/*
+//print the array
+const printArray = async () => {
+  const b = await myArray;
+  console.log(b); 
+};
+printArray();
+*/
 
 
 //Pour chaque image de la grille, image alea de la BD
@@ -72,4 +82,4 @@ if(!localStorage.getItem('name')) {
 }
 
 
-
+//console.log(typeof myArray);
