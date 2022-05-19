@@ -1,9 +1,10 @@
 import os
-
+import creator as cr
 
 from flask import Flask
 from flask import render_template
 from flask import jsonify
+
 
 
 def create_app(test_config=None):
@@ -29,8 +30,8 @@ def create_app(test_config=None):
 
     @app.route('/img_array')
     def serveArray():
-        a = [1,2,3]
-        return jsonify(array=a)
+        LI = cr.retImGrid()
+        return jsonify(array=LI)
     
     @app.route('/')
     def index():
@@ -42,4 +43,3 @@ def create_app(test_config=None):
 
     return app
         
-
