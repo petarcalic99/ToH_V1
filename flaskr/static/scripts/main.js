@@ -16,7 +16,8 @@ const myInit = {
   cache: 'default',   //idk
 };
 
-const myRequest = new Request('img_array');
+
+const myRequest = new Request('img_array'); //url to fecth the array
 
 //check the html loaded
 //window.addEventListener('DOMContentLoaded', requestArray);
@@ -28,7 +29,7 @@ function requestArray(){
 }
 
 let myArray = requestArray();
-myArray.then( (a) => { console.log(a)});  //resolve for print the array
+//myArray.then( (a) => { console.log(a)});  //resolve for print the array
 
 
 //Pour chaque image de la grille, image alea de la BD
@@ -52,8 +53,52 @@ function getImgQ(MyImage){
   }
 }
 
+//using canvas to show the array on a pixel level 
+window.onload = function(){
+  
+  var canvas = document.getElementById("viewport");
+  var context = canvas.getContext("2d");
 
-// Personalized welcome message code
+  //def image dim
+  var width = canvas.width;
+  var height = canvas.height;
+
+  var imagedata = context.createImageData(width,height);
+
+  function createImage(){
+    //for all pixels
+    //console.log(typeof myArray);
+    myArray.then( (a) => { 
+    for (var x=0; x<width; x++){
+      for (var y=0; y<height; y++){
+        var pixelindex = (y*width + x)*4
+
+        imagedata.data[pixelindex] = a[pixelindex]*255 //red
+        imagedata.data[pixelindex + 1] = a[pixelindex+1]*255 //green
+        imagedata.data[pixelindex + 2] = a[pixelindex+2]*255 //blue
+        imagedata.data[pixelindex + 3] = 255 //alpha
+      
+      }
+      }
+      console.log(a.array); 
+    });
+  }
+
+  function main(){
+    createImage();
+    context.putImageData(imagedata,0,0);
+  }
+
+  main(); //call the main function
+}
+
+
+
+
+
+
+////////////////
+// Personalized welcome message
 let myButton = document.querySelector('button');
 let myHeading = document.querySelector('h1');
 
