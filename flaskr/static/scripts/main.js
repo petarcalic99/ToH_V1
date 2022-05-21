@@ -80,7 +80,7 @@ window.onload = function(){
       
       }
       }
-      console.log(a.array); 
+      console.log(a.array[0][1][1]); 
     });
   }
 
