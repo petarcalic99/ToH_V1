@@ -73,23 +73,27 @@ window.onload = function(){
       for (var y=0; y<height; y++){
         var pixelindex = (y*width + x)*4
 
-        imagedata.data[pixelindex] = a[pixelindex]*255 //red
-        imagedata.data[pixelindex + 1] = a[pixelindex+1]*255 //green
-        imagedata.data[pixelindex + 2] = a[pixelindex+2]*255 //blue
+        imagedata.data[pixelindex] = a.array[x][y][0]*255 //red
+        imagedata.data[pixelindex + 1] = a.array[x][y][1]*255 //green
+        imagedata.data[pixelindex + 2] = a.array[x][y][2]*255 //blue
         imagedata.data[pixelindex + 3] = 255 //alpha
       
       }
-      }
-      console.log(a.array[0][1][1]); 
+    }
+    console.log(imagedata.data);
+    context.putImageData(imagedata,0,0);
     });
   }
-
+createImage();  
+/*
   function main(){
     createImage();
+    //console.log(imagedata.data); 
     context.putImageData(imagedata,0,0);
   }
 
   main(); //call the main function
+*/
 }
 
 
