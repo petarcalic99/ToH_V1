@@ -26,6 +26,7 @@ def imshow(img):
 
 #return image grid, np array to list conversion also.
 def retImGrid():
+    imagesM, labelsM = dataIterM.next()
     img = torchvision.utils.make_grid(imagesM, nrow=3, padding=0)
     img = img / 2 + 0.5
     npimg = img.numpy()

@@ -28,9 +28,7 @@ function requestArray(){
   .then(response => response.json())
 }
 
-let myArray = requestArray();
-//myArray.then( (a) => { console.log(a)});  //resolve for print the array
-
+let myArray = requestArray(); //Stores the promise
 
 //Pour chaque image de la grille, image alea de la BD
 myImages.forEach(updateImage);
@@ -77,7 +75,6 @@ window.onload = function(){
         imagedata.data[pixelindex + 1] = a.array[x][y][1]*255 //green
         imagedata.data[pixelindex + 2] = a.array[x][y][2]*255 //blue
         imagedata.data[pixelindex + 3] = 255 //alpha
-      
       }
     }
     console.log(imagedata.data);
@@ -85,18 +82,7 @@ window.onload = function(){
     });
   }
 createImage();  
-/*
-  function main(){
-    createImage();
-    //console.log(imagedata.data); 
-    context.putImageData(imagedata,0,0);
-  }
-
-  main(); //call the main function
-*/
 }
-
-
 
 
 
@@ -112,7 +98,7 @@ function setUserName() {
     setUserName();
   } else {
     localStorage.setItem('name', myName);
-    myHeading.innerHTML = 'Welcome ' + myName;
+    myHeading.innerHTML = 'Welcome ' + myName + ',to the Test Of Humanity';
   }
 }
 
