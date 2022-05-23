@@ -44,7 +44,7 @@ def retImGrid():
     img = img / 2 + 0.5
     npimg = img.numpy()
     npImgTr = np.transpose(npimg, (1,2,0))
-    npImgTrResized = resizeIm(npImgTr, 400)
+    npImgTrResized = resizeIm(npImgTr, 600)
     imgGrid = npImgTrResized.tolist() 
     return imgGrid
 

@@ -46,6 +46,11 @@ body {
 	height: 100%;
 	object-fit: cover;
 }
-	
+
+canvas {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
 	
 

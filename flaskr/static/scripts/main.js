@@ -71,9 +71,9 @@ window.onload = function(){
       for (var y=0; y<height; y++){
         var pixelindex = (y*width + x)*4
 
-        imagedata.data[pixelindex] = a.array[x][y][0]*255 //red
-        imagedata.data[pixelindex + 1] = a.array[x][y][1]*255 //green
-        imagedata.data[pixelindex + 2] = a.array[x][y][2]*255 //blue
+        imagedata.data[pixelindex] = a.array[y][x][0]*255 //red
+        imagedata.data[pixelindex + 1] = a.array[y][x][1]*255 //green
+        imagedata.data[pixelindex + 2] = a.array[y][x][2]*255 //blue
         imagedata.data[pixelindex + 3] = 255 //alpha
       }
     }
