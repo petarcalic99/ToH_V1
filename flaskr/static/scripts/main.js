@@ -68,7 +68,7 @@ document.onclick = clickInput;
 function clickInput(e){
   var canvas = document.getElementById("viewport");
   var rect = canvas.getBoundingClientRect();
-  
+  //max clickable has to be is rect.right and down
   console.log(`Position: (${e.clientX - rect.left}, ${e.clientY - rect.top})`);
 }
 
@@ -76,14 +76,14 @@ function clickInput(e){
 ////////////////
 // Personalized welcome message
 let myHeading = document.querySelector('h1');
-
+//store the name in the local storage
 function setUserName() {
   let myName = prompt('Please enter your name.');
   if(!myName) {
     setUserName();
   } else {
     localStorage.setItem('name', myName);
-    myHeading.innerHTML = 'Welcome ' + myName + ',to the Test Of Humanity';
+    myHeading.innerHTML = myName + ', Welcome to the Test Of Humanity';
   }
 }
 
