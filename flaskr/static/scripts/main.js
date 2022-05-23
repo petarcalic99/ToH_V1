@@ -2,7 +2,6 @@
 let DBSIZE = 20; 
 
 
-
 // parameters for the request function
 const myHeaders = new Headers();
 myHeaders.append('Accept', '/img_array'); 
@@ -26,7 +25,8 @@ function requestArray(){
   .then(response => response.json())
 }
 
-let myArray = requestArray(); //Stores the promise
+//Stores the promise
+let myArray = requestArray(); 
 
 //using canvas to show the array on a pixel level 
 window.onload = function(){
@@ -42,19 +42,18 @@ window.onload = function(){
 
   function createImage(){
     //for all pixels
-    //console.log(typeof myArray);
     myArray.then( (a) => { 
-    for (var x=0; x<width; x++){
-      for (var y=0; y<height; y++){
+    for (var x=0; x<height; x++){
+      for (var y=0; y<width; y++){
         var pixelindex = (y*width + x)*4
 
-        imagedata.data[pixelindex] = a.array[y][x][0]*255 //red
+        imagedata.data[pixelindex] = a.array[y][x][0]*255 //red         //invert x and y maybe
         imagedata.data[pixelindex + 1] = a.array[y][x][1]*255 //green
         imagedata.data[pixelindex + 2] = a.array[y][x][2]*255 //blue
         imagedata.data[pixelindex + 3] = 255 //alpha
       }
     }
-    console.log(imagedata.data);
+    //console.log(imagedata.data);
     context.putImageData(imagedata,0,0);
     });
   }
@@ -62,11 +61,18 @@ createImage();
 }
 
 
+//////////////////
+//track the coordinates of the user s click
+let log = document.querySelector('canvas');
+document.onclick = clickInput;
+
+function clickInput(e){
+  console.log(`Position: (${e.clientX}, ${e.clientY})`);
+}
 
 
 ////////////////
 // Personalized welcome message
-//let myButton = document.querySelector('button');
 let myHeading = document.querySelector('h1');
 
 function setUserName() {
