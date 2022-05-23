@@ -26,8 +26,8 @@ def create_app(test_config=None):
     except OSError:
         pass
 
-    #routing
 
+    #routing
     @app.route('/img_array')
     def serveArray():
         LI = cr.retImGrid()

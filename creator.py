@@ -5,7 +5,9 @@ import matplotlib.pyplot as plt
 import torch
 import torchvision
 import torchvision.transforms as transforms
+import cv2
 from torchvision.transforms import ToTensor
+
 
 transform = transforms.Compose([transforms.ToTensor(), transforms.Normalize((0.5,0.5,0.5), (0.5,0.5,0.5))])
 batch_size = 9
@@ -16,6 +18,17 @@ classes = ('0','1','2','3','4','5','6','7','8','9')
 
 dataIterM = iter(trainLoaderMnist)
 imagesM, labelsM = dataIterM.next()
+
+def resizeIm(src, scale_percent):
+    #percent by which the image is resized: scale_percent
+    #calculate the 50 percent of original dimensions
+    width = int(src.shape[1] * scale_percent / 100)
+    height = int(src.shape[0] * scale_percent / 100)
+    dsize = (width, height)
+
+    # resize image
+    output = cv2.resize(src, dsize)
+    return output
 
 def imshow(img):
     img = img / 2 + 0.5  #unnormalize
@@ -31,8 +44,11 @@ def retImGrid():
     img = img / 2 + 0.5
     npimg = img.numpy()
     npImgTr = np.transpose(npimg, (1,2,0))
-    imgGrid = npImgTr.tolist() 
+    npImgTrResized = resizeIm(npImgTr, 400)
+    imgGrid = npImgTrResized.tolist() 
     return imgGrid
+
+
 
 #Test    
 """
