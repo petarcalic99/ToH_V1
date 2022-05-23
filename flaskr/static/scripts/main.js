@@ -1,5 +1,3 @@
-//Get all images in the grid
-let myImages = document.querySelectorAll('.gallery_img');
  // Size of the Image DB used for the test
 let DBSIZE = 20; 
 
@@ -29,27 +27,6 @@ function requestArray(){
 }
 
 let myArray = requestArray(); //Stores the promise
-
-//Pour chaque image de la grille, image alea de la BD
-myImages.forEach(updateImage);
-
-function updateImage(myImage){
-  var randomNum = Math.floor(Math.random() * DBSIZE);
-  let randomNumStr = randomNum.toString();
-  let srcIm = '/static/images/MNIST20/000' + randomNumStr + '.png';
-  myImage.setAttribute ('src',srcIm);
-}
-
-
-//get pictures src on click
-myImages.forEach(getImgQ);
-
-function getImgQ(MyImage){
-  MyImage.onclick = function getImgSrc(){
-    let ImgSrc = MyImage.getAttribute('src');
-  console.log(ImgSrc);
-  }
-}
 
 //using canvas to show the array on a pixel level 
 window.onload = function(){
@@ -89,7 +66,7 @@ createImage();
 
 ////////////////
 // Personalized welcome message
-let myButton = document.querySelector('button');
+//let myButton = document.querySelector('button');
 let myHeading = document.querySelector('h1');
 
 function setUserName() {
