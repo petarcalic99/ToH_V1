@@ -1,6 +1,7 @@
  // Size of the Image DB used for the test
 let DBSIZE = 20; 
-
+let RESIZE_FACTOR = 4;
+let ORIGINAL_SIZE = 28
 
 // parameters for the request function
 const myHeaders = new Headers();
@@ -62,15 +63,34 @@ createImage();
 
 
 //////////////////
-//track the coordinates of the user s click
+//Track the coordinates of the user s answer
+//(width and height of the canvas: 448 pixels)  
+
 document.onclick = clickInput;
 
-function clickInput(e){
+function clickCoord(e){
   var canvas = document.getElementById("viewport");
+  var context = canvas.getContext("2d");
   var rect = canvas.getBoundingClientRect();
+  
   //max clickable has to be is rect.right and down
   console.log(`Position: (${e.clientX - rect.left}, ${e.clientY - rect.top})`);
+  let cX = e.clientX - rect.left;
+  let cY = e.clientY - rect.top;
+
+  //size of snapshot: size in original_pixels*resize_factor pixels
+  sizeSnap = 28*RESIZE_FACTOR/2;
+  
+  //the click is the center of the snap so we do x and y minus half of the lengdth
+  startSnapX = cX - sizeSnap;
+  startSnapY = cY - sizeSnap;
+  
+  //Snapshot of the image, it needs to be sent to the server
+  imageDataSnap = context.getImageData(startSnapX,startSnapY,sizeSnap,sizeSnap);
+  return imageDataSnap;
 }
+
+
 
 
 ////////////////
