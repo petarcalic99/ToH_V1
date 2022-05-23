@@ -63,11 +63,13 @@ createImage();
 
 //////////////////
 //track the coordinates of the user s click
-let log = document.querySelector('canvas');
 document.onclick = clickInput;
 
 function clickInput(e){
-  console.log(`Position: (${e.clientX}, ${e.clientY})`);
+  var canvas = document.getElementById("viewport");
+  var rect = canvas.getBoundingClientRect();
+  
+  console.log(`Position: (${e.clientX - rect.left}, ${e.clientY - rect.top})`);
 }
 
 
