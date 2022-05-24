@@ -93,11 +93,11 @@ function clickCoord(e){
 
   log.textContent = `Click Coordinates: (${cX}, ${cY})`;
   //size of snapshot: size in original_pixels*resize_factor pixels
-  sizeSnap = ORIGINAL_SIZE*RESIZE_FACTOR/2;
+  sizeSnap = ORIGINAL_SIZE*RESIZE_FACTOR;
   
   //the click is the center of the snap so we do x and y minus half of the lengdth
-  startSnapX = cX - sizeSnap;
-  startSnapY = cY - sizeSnap;
+  startSnapX = cX - sizeSnap/2;
+  startSnapY = cY - sizeSnap/2;
   
   //Snapshot of the image, it needs to be sent to the server
   dataSnap = context.getImageData(startSnapX,startSnapY,sizeSnap,sizeSnap);
@@ -106,17 +106,7 @@ function clickCoord(e){
 
 ////////////////////
 //Upload the snap to the server
-//1create the json:
-
-//Make button funtion to confrim the upload and create the JSON 
-let myButton = document.querySelector('button');
-myButton.onclick = function() {
-  //dataSnap upload
-}
-
-
-
-const myInitPost = {
+let myInitPost = {
   method: 'POST',
   headers: {'Content-Type': 'application/json'},
   body: JSON.stringify(dataSnap),
@@ -135,6 +125,14 @@ function uploadJson(){
   });
 }
 
+//Make button funtion to confrim the upload and create the JSON 
+let myButton = document.querySelector('button');
+myButton.onclick = function() {
+  myInitPost.body = JSON.stringify(dataSnap);
+  //console.log(JSON.stringify(dataSnap));
+  uploadJson();
+  console.log("upload");
+}
 
 
 

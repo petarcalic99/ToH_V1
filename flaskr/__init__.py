@@ -5,8 +5,9 @@ import creator as cr
 from flask import Flask
 from flask import render_template
 from flask import jsonify
+from flask import request
 
-
+dataSnap = {}
 
 def create_app(test_config=None):
     #create and config the app
@@ -36,8 +37,11 @@ def create_app(test_config=None):
 
     @app.route('/snap_array', methods = ['POST'])
     def snapArray():
-        data = request.get_json()    
-    
+        data = request.json 
+        print(type(data))
+        dataSnap = data
+        return data        
+
     @app.route('/')
     def index():
         return render_template("index.html")
@@ -47,4 +51,9 @@ def create_app(test_config=None):
         return "Internship at ledger 2022, AI Master student at UPMC"
 
     return app
-        
+
+
+
+    def getSnap():
+        return dataSnap
+    
