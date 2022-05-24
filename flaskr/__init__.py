@@ -1,13 +1,14 @@
 import os
 from urllib import request
 import creator as cr
+import matplotlib.pyplot as plt
+import numpy as np
 
 from flask import Flask
 from flask import render_template
 from flask import jsonify
 from flask import request
 
-dataSnap = {}
 
 def create_app(test_config=None):
     #create and config the app
@@ -38,8 +39,11 @@ def create_app(test_config=None):
     @app.route('/snap_array', methods = ['POST'])
     def snapArray():
         data = request.json 
-        print(type(data))
-        dataSnap = data
+        dataList = list(data['data'].values())
+        datanp = np.array(dataList)
+        #datanp = datanp.reshape(1,len(datanp))
+
+
         return data        
 
     @app.route('/')
@@ -53,7 +57,3 @@ def create_app(test_config=None):
     return app
 
 
-
-    def getSnap():
-        return dataSnap
-    
