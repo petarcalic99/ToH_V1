@@ -1,9 +1,12 @@
  // Size of the Image DB used for the test
 let DBSIZE = 20; 
-let RESIZE_FACTOR = 4;
-let ORIGINAL_SIZE = 28
+let RESIZE_FACTOR = 3;
+let ORIGINAL_SIZE = 28;
+let dataSnap ;
 
-// parameters for the request function
+
+////////////////////////
+// Fetching the array from Server
 const myHeaders = new Headers();
 myHeaders.append('Accept', '/img_array'); 
 
@@ -66,28 +69,70 @@ createImage();
 //Track the coordinates of the user s answer
 //(width and height of the canvas: 448 pixels)  
 
-document.onclick = clickInput;
+document.onclick = clickCoord;
+let log = document.getElementById('log');
 
 function clickCoord(e){
   var canvas = document.getElementById("viewport");
   var context = canvas.getContext("2d");
   var rect = canvas.getBoundingClientRect();
   
-  //max clickable has to be is rect.right and down
-  console.log(`Position: (${e.clientX - rect.left}, ${e.clientY - rect.top})`);
+   // console.log(`Position: (${e.clientX - rect.left}, ${e.clientY - rect.top})`);
   let cX = e.clientX - rect.left;
   let cY = e.clientY - rect.top;
+  
+  //Check if click is outside of cenvas
+  if (cX<0 || cX > ORIGINAL_SIZE*RESIZE_FACTOR*5){
+    cX = 0;
+    cY = 0;
+  }
+  if (cY<0 || cY > ORIGINAL_SIZE*RESIZE_FACTOR*5){
+    cY = 0;
+    cX = 0;
+  }
 
+  log.textContent = `Click Coordinates: (${cX}, ${cY})`;
   //size of snapshot: size in original_pixels*resize_factor pixels
-  sizeSnap = 28*RESIZE_FACTOR/2;
+  sizeSnap = ORIGINAL_SIZE*RESIZE_FACTOR/2;
   
   //the click is the center of the snap so we do x and y minus half of the lengdth
   startSnapX = cX - sizeSnap;
   startSnapY = cY - sizeSnap;
   
   //Snapshot of the image, it needs to be sent to the server
-  imageDataSnap = context.getImageData(startSnapX,startSnapY,sizeSnap,sizeSnap);
-  return imageDataSnap;
+  dataSnap = context.getImageData(startSnapX,startSnapY,sizeSnap,sizeSnap);
+}
+
+
+////////////////////
+//Upload the snap to the server
+//1create the json:
+
+//Make button funtion to confrim the upload and create the JSON 
+let myButton = document.querySelector('button');
+myButton.onclick = function() {
+  //dataSnap upload
+}
+
+
+
+const myInitPost = {
+  method: 'POST',
+  headers: {'Content-Type': 'application/json'},
+  body: JSON.stringify(dataSnap),
+};
+
+const myRequestPost = new Request('/snap_array'); //url to POST array
+
+function uploadJson(){
+  fetch(myRequestPost, myInitPost)
+  .then(response => response.json())
+  .then(dataSnap => {
+    console.log('Success:', dataSnap);
+  })
+  .catch((error) => {
+   console.error('Error:', error);
+  });
 }
 
 

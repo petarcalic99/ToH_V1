@@ -1,4 +1,5 @@
 import os
+from urllib import request
 import creator as cr
 
 from flask import Flask
@@ -28,10 +29,14 @@ def create_app(test_config=None):
 
 
     #routing
-    @app.route('/img_array')
+    @app.route('/img_array', methods = ['GET'])
     def serveArray():
         LI = cr.retImGrid()
         return jsonify(array=LI)
+
+    @app.route('/snap_array', methods = ['POST'])
+    def snapArray():
+        data = request.get_json()    
     
     @app.route('/')
     def index():

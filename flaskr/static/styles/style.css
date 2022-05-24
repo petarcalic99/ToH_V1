@@ -52,5 +52,10 @@ canvas {
   margin-left: auto;
   margin-right: auto;
 }
-	
+
+button {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
 
