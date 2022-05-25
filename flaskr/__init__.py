@@ -41,9 +41,18 @@ def create_app(test_config=None):
         data = request.json 
         dataList = list(data['data'].values())
         datanp = np.array(dataList)
-        #datanp = datanp.reshape(1,len(datanp))
+        
+        #First lets remove every 4th elemnnt from the vector
+        datanp = np.delete(datanp, np.arange(0, datanp.size, 4))
 
+        #Now from vector Lets construct an array of shape [28x3, 28x3, 3]
+        dataMatrix = np.empty(shape = (28*3, 28*3, 3), dtype=int)
+        datanp = datanp.reshape(84,84,3)
 
+        #Test
+        #plt.imshow(datanp)
+        #plt.show()           
+                                      
         return data        
 
     @app.route('/')

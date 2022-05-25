@@ -46,7 +46,7 @@ def retImGrid():
     imagesM, labelsM = dataIterM.next()
     img = torchvision.utils.make_grid(imagesM, nrow=5, padding=0)
     img = img / 2 + 0.5
-    npimg = img.numpy()
+    npimg = img.numpy()                   #TURNS IT INTO RGB PIXELS!!!!!!!!!!
     npImgTr = np.transpose(npimg, (1,2,0))
     npImgTrResized = resizeIm(npImgTr, 300)      #resizidng
     imgGrid = npImgTrResized.tolist() 
