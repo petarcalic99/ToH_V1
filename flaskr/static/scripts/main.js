@@ -1,7 +1,7 @@
-const RESIZE_FACTOR = 3;
-const ORIGINAL_SIZE = 28;
-const BATCH_SIZE = 5; 
-let dataSnap ;
+const RESIZE_FACTOR = 3;  //multiplies th number of pixels
+const ORIGINAL_SIZE = 28; //width of a picture in pixels (every pixel then has three values RGB)
+const BATCH_SIZE = 5;  //number of images in a line 
+let dataSnap ;    //where we will store the crop of the image with the click
 
 
 ////////////////////////
@@ -35,17 +35,17 @@ window.onload = function(){
   var context = canvas.getContext("2d");
 
   //def image dim
-  var width = canvas.width;
-  var height = canvas.height;
-
-  var imagedata = context.createImageData(width,height);
+  let width = canvas.width;
+  let height = canvas.height;
+  //to store the data
+  let imagedata = context.createImageData(width,height);
 
   function createImage(){
     //for all pixels
     myArray.then( (a) => { 
-    for (var x=0; x<height; x++){
-      for (var y=0; y<width; y++){
-        var pixelindex = (y*width + x)*4
+    for (let x=0; x<height; x++){
+      for (let y=0; y<width; y++){
+        let pixelindex = (y*width + x)*4
 
         imagedata.data[pixelindex] = a.array[y][x][0]*255 //red         //invert x and y maybe
         imagedata.data[pixelindex + 1] = a.array[y][x][1]*255 //green
@@ -53,7 +53,7 @@ window.onload = function(){
         imagedata.data[pixelindex + 3] = 255 //alpha
       }
     }
-    //console.log(imagedata.data);
+    //imshow function
     context.putImageData(imagedata,0,0);
     });
   }
@@ -71,9 +71,9 @@ document.onclick = clickCoord;
 let log = document.getElementById('log');
 
 function clickCoord(e){
-  var canvas = document.getElementById("viewport");
-  var context = canvas.getContext("2d");
-  var rect = canvas.getBoundingClientRect();
+  let canvas = document.getElementById("viewport");
+  let context = canvas.getContext("2d");
+  let rect = canvas.getBoundingClientRect();
   
    // console.log(`Position: (${e.clientX - rect.left}, ${e.clientY - rect.top})`);
   let cX = e.clientX - rect.left;
@@ -90,8 +90,8 @@ function clickCoord(e){
   }
 
   //cX check
-  var borderR = ORIGINAL_SIZE*RESIZE_FACTOR*BATCH_SIZE - ORIGINAL_SIZE*RESIZE_FACTOR/2;
-  var borderL = ORIGINAL_SIZE*RESIZE_FACTOR/2;
+  let borderR = ORIGINAL_SIZE*RESIZE_FACTOR*BATCH_SIZE - ORIGINAL_SIZE*RESIZE_FACTOR/2;
+  let borderL = ORIGINAL_SIZE*RESIZE_FACTOR/2;
   if(cX>borderR){
     cX = borderR;
   }
@@ -99,8 +99,8 @@ function clickCoord(e){
     cX = borderL;
   }
   //cY check
-  var borderD = ORIGINAL_SIZE*RESIZE_FACTOR*BATCH_SIZE - ORIGINAL_SIZE*RESIZE_FACTOR/2;
-  var borderT = ORIGINAL_SIZE*RESIZE_FACTOR/2;
+  let borderD = ORIGINAL_SIZE*RESIZE_FACTOR*BATCH_SIZE - ORIGINAL_SIZE*RESIZE_FACTOR/2;
+  let borderT = ORIGINAL_SIZE*RESIZE_FACTOR/2;
   if(cY>borderD){
     cY = borderD;
   }
@@ -121,10 +121,10 @@ function clickCoord(e){
   
 
   //Display Snap
-  var canvasSnap = document.getElementById("snapshot");
-  var contextSnap = canvasSnap.getContext("2d");
-  var width = canvasSnap.width;
-  var height = canvasSnap.height;
+  let canvasSnap = document.getElementById("snapshot");
+  let contextSnap = canvasSnap.getContext("2d");
+  let width = canvasSnap.width;
+  let height = canvasSnap.height;
 
   contextSnap.putImageData(dataSnap,0,0);
   

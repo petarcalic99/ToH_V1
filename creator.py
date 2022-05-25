@@ -34,6 +34,7 @@ def resizeIm(src, scale_percent):
     output = cv2.resize(src, dsize)
     return output
 
+#For testing purposes shows the image
 def imshow(img):
     img = img / 2 + 0.5  #unnormalize
     npimg = img.numpy() #tensor to np
