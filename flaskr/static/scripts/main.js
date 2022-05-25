@@ -20,9 +20,6 @@ const myInit = {
 
 const myRequest = new Request('img_array'); //url to fecth the array
 
-//check the html loaded
-//window.addEventListener('DOMContentLoaded', requestArray);
-
 //fethcing array from server
 function requestArray(){
   return fetch(myRequest, myInit)
@@ -65,9 +62,11 @@ createImage();
 }
 
 
+
+
+
 //////////////////
-//Track the coordinates of the user s answer
-//(width and height of the canvas: 448 pixels)  
+//Track the coordinates of the user s answer  
 
 document.onclick = clickCoord;
 let log = document.getElementById('log');
@@ -104,6 +103,8 @@ function clickCoord(e){
 }
 
 
+
+
 ////////////////////
 //Upload the snap to the server
 let myInitPost = {
@@ -133,6 +134,7 @@ myButton.onclick = function() {
   uploadJson();
   console.log("upload");
 }
+
 
 
 
