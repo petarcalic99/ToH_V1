@@ -80,6 +80,8 @@ function clickCoord(e){
   let cX = e.clientX - rect.left;
   let cY = e.clientY - rect.top;
   
+
+  //IMPORTANT TO CHECK IF ALL EDGES RETURN SOMETHING FEASABLE
   //Check if click is outside of cenvas
   if (cX<0 || cX > ORIGINAL_SIZE*RESIZE_FACTOR*5){
     cX = 0;
@@ -100,6 +102,22 @@ function clickCoord(e){
   
   //Snapshot of the image, it needs to be sent to the server
   dataSnap = context.getImageData(startSnapX,startSnapY,sizeSnap,sizeSnap);
+  
+  
+  
+  console.log(dataSnap)
+  //Display Snap
+  var canvasSnap = document.getElementById("snapshot");
+  var contextSnap = canvasSnap.getContext("2d");
+
+  //def image dim
+  var width = canvasSnap.width;
+  var height = canvasSnap.height;
+
+  var snapdata = contextSnap.createImageData(width,height);
+  contextSnap.putImageData(dataSnap,0,0);
+  
+
 }
 
 
