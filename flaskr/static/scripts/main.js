@@ -1,7 +1,6 @@
- // Size of the Image DB used for the test
-let DBSIZE = 20; 
-let RESIZE_FACTOR = 3;
-let ORIGINAL_SIZE = 28;
+const RESIZE_FACTOR = 3;
+const ORIGINAL_SIZE = 28;
+const BATCH_SIZE = 5; 
 let dataSnap ;
 
 
@@ -81,15 +80,36 @@ function clickCoord(e){
   let cY = e.clientY - rect.top;
   
 
-  //IMPORTANT TO CHECK IF ALL EDGES RETURN SOMETHING FEASABLE
+  //IMPORTANT TO CHECK IF ALL EDGES RETURN SOMETHING FEASABLE:
+  
   //Check if click is outside of cenvas
-  if (cX<0 || cX > ORIGINAL_SIZE*RESIZE_FACTOR*5){
+  if (cX<0 || cX > ORIGINAL_SIZE*RESIZE_FACTOR*BATCH_SIZE){
     cX = 0;
     cY = 0;
   }
-  if (cY<0 || cY > ORIGINAL_SIZE*RESIZE_FACTOR*5){
+  if (cY<0 || cY > ORIGINAL_SIZE*RESIZE_FACTOR*BATCH_SIZE){
     cY = 0;
     cX = 0;
+  }
+
+  //cX check
+  var borderR = ORIGINAL_SIZE*RESIZE_FACTOR*BATCH_SIZE - ORIGINAL_SIZE*RESIZE_FACTOR/2;
+  var borderL = ORIGINAL_SIZE*RESIZE_FACTOR/2;
+  if(cX>borderR){
+    cX = borderR;
+  }
+  if(cX<borderL){
+    cX = borderL;
+  }
+
+  //cY check
+  var borderD = ORIGINAL_SIZE*RESIZE_FACTOR*BATCH_SIZE - ORIGINAL_SIZE*RESIZE_FACTOR/2;
+  var borderT = ORIGINAL_SIZE*RESIZE_FACTOR/2;
+  if(cY>borderD){
+    cY = borderD;
+  }
+  if(cY<borderT){
+    cY = borderT;
   }
 
   log.textContent = `Click Coordinates: (${cX}, ${cY})`;
@@ -100,21 +120,16 @@ function clickCoord(e){
   startSnapX = cX - sizeSnap/2;
   startSnapY = cY - sizeSnap/2;
   
-  //Snapshot of the image, it needs to be sent to the server
+  //CREATING Snapshot of the image, it needs to be sent to the server
   dataSnap = context.getImageData(startSnapX,startSnapY,sizeSnap,sizeSnap);
   
-  
-  
-  console.log(dataSnap)
+
   //Display Snap
   var canvasSnap = document.getElementById("snapshot");
   var contextSnap = canvasSnap.getContext("2d");
-
-  //def image dim
   var width = canvasSnap.width;
   var height = canvasSnap.height;
 
-  var snapdata = contextSnap.createImageData(width,height);
   contextSnap.putImageData(dataSnap,0,0);
   
 
