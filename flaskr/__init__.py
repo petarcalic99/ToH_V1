@@ -1,3 +1,4 @@
+from configparser import SafeConfigParser
 import os
 from urllib import request
 import creator as cr
@@ -30,6 +31,8 @@ def create_app(test_config=None):
         pass
 
 
+    user_response = np.empty([84,84,3])
+
     #routing
     @app.route('/img_array', methods = ['GET'])
     def serveArray():
@@ -48,11 +51,13 @@ def create_app(test_config=None):
         #Now from vector Lets construct an array of shape [28x3, 28x3, 3]
         dataMatrix = np.empty(shape = (28*3, 28*3, 3), dtype=int)
         datanp = datanp.reshape(84,84,3)
+        #copy the content of the array outside of this function
+        np.copyto(user_response, datanp)
 
         #Test
         #plt.imshow(datanp)
-        #plt.show()           
-                                      
+        #plt.show()                                         
+        
         return data        
 
     @app.route('/')
@@ -64,5 +69,3 @@ def create_app(test_config=None):
         return "Internship at ledger 2022, AI Master student at UPMC"
 
     return app
-
-

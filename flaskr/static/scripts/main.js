@@ -16,7 +16,6 @@ const myInit = {
   cache: 'default',   //idk
 };
 
-
 const myRequest = new Request('img_array'); //url to fecth the array
 
 //fethcing array from server
@@ -31,8 +30,8 @@ let myArray = requestArray();
 //using canvas to show the array on a pixel level 
 window.onload = function(){
   
-  var canvas = document.getElementById("viewport");
-  var context = canvas.getContext("2d");
+  let canvas = document.getElementById("viewport");
+  let context = canvas.getContext("2d");
 
   //def image dim
   let width = canvas.width;
