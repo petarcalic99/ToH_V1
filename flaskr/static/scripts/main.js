@@ -81,15 +81,12 @@ function clickCoord(e){
   
 
   //IMPORTANT TO CHECK IF ALL EDGES RETURN SOMETHING FEASABLE:
-  
   //Check if click is outside of cenvas
   if (cX<0 || cX > ORIGINAL_SIZE*RESIZE_FACTOR*BATCH_SIZE){
-    cX = 0;
-    cY = 0;
+    return
   }
   if (cY<0 || cY > ORIGINAL_SIZE*RESIZE_FACTOR*BATCH_SIZE){
-    cY = 0;
-    cX = 0;
+    return
   }
 
   //cX check
@@ -101,7 +98,6 @@ function clickCoord(e){
   if(cX<borderL){
     cX = borderL;
   }
-
   //cY check
   var borderD = ORIGINAL_SIZE*RESIZE_FACTOR*BATCH_SIZE - ORIGINAL_SIZE*RESIZE_FACTOR/2;
   var borderT = ORIGINAL_SIZE*RESIZE_FACTOR/2;
