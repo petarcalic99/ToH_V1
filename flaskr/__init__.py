@@ -8,6 +8,7 @@ import numpy as np
 import torch
 import torch.nn as nn
 import torch.optim as optim
+import torchvision
 
 
 from flask import Flask
@@ -58,6 +59,7 @@ def create_app(test_config=None):
     network = Net()
     #optimizer = optim.SGD(network.parameters(), lr=learning_rate, momentum=momentum)
     
+    
     # Load
     model = Net()
     model.load_state_dict(torch.load("model.pth"))
@@ -80,9 +82,6 @@ def create_app(test_config=None):
         
         #First lets remove every 4th elemnnt from the vector
         datanp = np.delete(datanp, np.arange(0, datanp.size, 4))
-
-        #Now from vector Lets construct an array of shape [28x3, 28x3, 3]
-        dataMatrix = np.empty(shape = (28*3, 28*3, 3), dtype=int)
         datanp = datanp.reshape(84,84,3)
         #copy the content of the array outside of this function
         np.copyto(user_response, datanp)
@@ -90,7 +89,29 @@ def create_app(test_config=None):
         #Test
         #plt.imshow(datanp)
         #plt.show()                                         
+
+        #convert to grayScale
+        user_response_Gray = user_response.astype(np.uint8)
+      #  print(user_response_Gray)
+        user_response_Gray = torchvision.transforms.ToPILImage()(user_response_Gray)
         
+        user_response_Gray = torchvision.transforms.Grayscale()(user_response_Gray)
+        user_response_Gray = torchvision.transforms.ToTensor()(user_response_Gray)
+        #user_response_Gray = user_response_Gray
+        plt.imshow(user_response_Gray.numpy()[0])
+        plt.show()
+
+
+
+        #example =
+        #output = model(example)     #produces the output
+        #pred = output.data.max(1, keepdim=True)[1]
+        #print("pred", pred)
+            
+
+
+
+
         return data        
 
     @app.route('/')
