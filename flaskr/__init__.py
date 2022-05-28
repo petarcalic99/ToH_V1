@@ -9,6 +9,7 @@ import torch
 import torch.nn as nn
 import torch.optim as optim
 import torchvision
+import torch.nn.functional as F
 
 
 from flask import Flask
@@ -97,16 +98,19 @@ def create_app(test_config=None):
         
         user_response_Gray = torchvision.transforms.Grayscale()(user_response_Gray)
         user_response_Gray = torchvision.transforms.ToTensor()(user_response_Gray)
-        #user_response_Gray = user_response_Gray
-        plt.imshow(user_response_Gray.numpy()[0])
-        plt.show()
+        user_response_GrayNP = user_response_Gray.numpy()[0] 
+        user_response_GrayNP = cr.resizeIm(user_response_GrayNP, 100/3)
+        
+        #Test
+        #print(user_response_GrayNP.shape)
+        #plt.imshow(user_response_GrayNP)
+        #plt.show()
 
 
-
-        #example =
-        #output = model(example)     #produces the output
-        #pred = output.data.max(1, keepdim=True)[1]
-        #print("pred", pred)
+        example = torchvision.transforms.ToTensor()(user_response_GrayNP)
+        output = model(example)     #produces the output
+        pred = output.data.max(1, keepdim=True)[1]
+        print("pred", pred)
             
 
 
