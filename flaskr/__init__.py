@@ -5,6 +5,11 @@ import creator as cr
 import matplotlib.pyplot as plt
 import numpy as np
 
+import torch
+import torch.nn as nn
+import torch.optim as optim
+
+
 from flask import Flask
 from flask import render_template
 from flask import jsonify
@@ -32,6 +37,34 @@ def create_app(test_config=None):
 
 
     user_response = np.empty([84,84,3])
+    class Net(nn.Module):
+        def __init__(self):
+            super(Net, self).__init__()
+            self.conv1 = nn.Conv2d(1, 10, kernel_size=5)
+            self.conv2 = nn.Conv2d(10, 20, kernel_size=5)
+            self.conv2_drop = nn.Dropout2d()
+            self.fc1 = nn.Linear(320, 50)
+            self.fc2 = nn.Linear(50, 10)
+
+        def forward(self, x):
+            x = F.relu(F.max_pool2d(self.conv1(x), 2))
+            x = F.relu(F.max_pool2d(self.conv2_drop(self.conv2(x)), 2))
+            x = x.view(-1, 320)
+            x = F.relu(self.fc1(x))
+            x = F.dropout(x, training=self.training)
+            x = self.fc2(x)
+            return F.log_softmax(x)  
+
+    network = Net()
+    #optimizer = optim.SGD(network.parameters(), lr=learning_rate, momentum=momentum)
+    
+    # Load
+    model = Net()
+    model.load_state_dict(torch.load("model.pth"))
+    model.eval()
+    
+    #def captcha():
+
 
     #routing
     @app.route('/img_array', methods = ['GET'])
