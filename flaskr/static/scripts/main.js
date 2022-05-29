@@ -69,6 +69,10 @@ createImage();
 document.onclick = clickCoord;
 let log = document.getElementById('log');
 
+//display the answer later
+let answer = document.getElementById('answer');
+
+
 function clickCoord(e){
   let canvas = document.getElementById("viewport");
   let context = canvas.getContext("2d");
@@ -146,8 +150,10 @@ const myRequestPost = new Request('/snap_array'); //url to POST array
 function uploadJson(){
   fetch(myRequestPost, myInitPost)
   .then(response => response.json())
-  .then(dataSnap => {
-    console.log('Success:', dataSnap);
+  .then(result => {
+    console.log('Success:', result);
+    answer.textContent = `Answer: ${result}`;
+
   })
   .catch((error) => {
    console.error('Error:', error);

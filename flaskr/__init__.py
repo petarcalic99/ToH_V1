@@ -115,7 +115,8 @@ def create_app(test_config=None):
         #the answer to the test
         test_evalution = captcha(pred.item(),3)
         print(test_evalution)
-        return data        
+
+        return jsonify(test_evalution)        
 
     @app.route('/')
     def index():
