@@ -66,8 +66,11 @@ def create_app(test_config=None):
     model.load_state_dict(torch.load("model.pth"))
     model.eval()
     
-    #def captcha():
-
+    def captcha(prediction,target):
+        if (prediction == target):
+            return True
+        else:
+            return False
 
     #routing
     @app.route('/img_array', methods = ['GET'])
@@ -91,11 +94,9 @@ def create_app(test_config=None):
         #plt.imshow(datanp)
         #plt.show()                                         
 
-        #convert to grayScale
+        #convert to format ready to jump in the classifier
         user_response_Gray = user_response.astype(np.uint8)
-      #  print(user_response_Gray)
         user_response_Gray = torchvision.transforms.ToPILImage()(user_response_Gray)
-        
         user_response_Gray = torchvision.transforms.Grayscale()(user_response_Gray)
         user_response_Gray = torchvision.transforms.ToTensor()(user_response_Gray)
         user_response_GrayNP = user_response_Gray.numpy()[0] 
@@ -109,13 +110,11 @@ def create_app(test_config=None):
 
         example = torchvision.transforms.ToTensor()(user_response_GrayNP)
         output = model(example)     #produces the output
-        pred = output.data.max(1, keepdim=True)[1]
-        print("pred", pred)
-            
+        pred = output.data.max(1, keepdim=True)[1]    
 
-
-
-
+        #the answer to the test
+        test_evalution = captcha(pred.item(),3)
+        print(test_evalution)
         return data        
 
     @app.route('/')

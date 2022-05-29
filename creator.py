@@ -10,7 +10,7 @@ from torchvision.transforms import ToTensor
 
 
 transform = transforms.Compose([transforms.ToTensor(), torchvision.transforms.Normalize(
-                                 (0.1307,), (0.3081,))])
+                                 (0.1307,), (0.3081,))]) #if used makes resizing afekt more
 batch_size = 25
                 #82 % to have at least 1 occurence of the numbre X for the batch
                 # 4x4 and 1 good answer (Binomial Law). A Random response has
