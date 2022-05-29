@@ -7,7 +7,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 import torch.optim as optim
 
-n_epochs = 4
+n_epochs = 3
 batch_size_train = 64
 batch_size_test = 1000
 learning_rate = 0.01
@@ -21,6 +21,7 @@ torch.manual_seed(random_seed)
 train_loader = torch.utils.data.DataLoader(
   torchvision.datasets.MNIST(root='./data', train=True, download=True,
                              transform=torchvision.transforms.Compose([
+                               torchvision.transforms.RandomAffine(degrees = (-0,0),translate=(0,0)),  
                                torchvision.transforms.ToTensor(),
                                torchvision.transforms.Normalize(
                                  (0.1307,), (0.3081,))
@@ -30,6 +31,7 @@ train_loader = torch.utils.data.DataLoader(
 test_loader = torch.utils.data.DataLoader(
   torchvision.datasets.MNIST(root='./data', train=False, download=True,
                              transform=torchvision.transforms.Compose([
+                               torchvision.transforms.RandomAffine(degrees = (-0,0),translate=(0,0)),  
                                torchvision.transforms.ToTensor(),
                                torchvision.transforms.Normalize(
                                  (0.1307,), (0.3081,))
