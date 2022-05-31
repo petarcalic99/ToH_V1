@@ -43,11 +43,9 @@ def imshow(img):
 
 
 #return image grid, np array to list conversion also. 
-imagesM, labelsM = dataIterM.next()#Place in retImGrid for new images
 def retImGrid():
-    
+    imagesM, labelsM = dataIterM.next()
     img = torchvision.utils.make_grid(imagesM, nrow=5, padding=0)  #WHY TF did he turn it into RGB #@#!#
-    #img = img / 2 + 0.5
     npimg = img.numpy()                  
     npImgTr = np.transpose(npimg, (1,2,0))
     npImgTrResized = resizeIm(npImgTr, 300)      #resizidng

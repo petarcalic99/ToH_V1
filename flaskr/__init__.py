@@ -38,7 +38,7 @@ def create_app(test_config=None):
     except OSError:
         pass
 
-
+    #For storing responses later
     user_response = np.empty([84,84])
     
     class Net(nn.Module):
@@ -58,10 +58,7 @@ def create_app(test_config=None):
             x = F.dropout(x, training=self.training)
             x = self.fc2(x)
             return F.log_softmax(x)        
-    
-    #network = Net()
-    #optimizer = optim.SGD(network.parameters(), lr=learning_rate, momentum=momentum)
-    
+     
     
     # Load
     model = Net()
@@ -96,39 +93,20 @@ def create_app(test_config=None):
 
         for i in range(84):
             for j in range(84):
-                user_response[i][j] = datanp[i][j][0]
-
-        
-        
-        #copy the content of the array outside of this function
-        #np.copyto(user_response, datanp)
-        
-
-        #Test
-        #plt.imshow(datanp)
-        #plt.show()                                         
+                user_response[i][j] = datanp[i][j][0]                                     
 
         #convert to format ready to jump in the classifier
-        #user_response_Gray = user_response.astype(np.uint8)
+        
         user_response_GrayNP = user_response/255.0
-        #user_response_Gray = torchvision.transforms.ToPILImage()(user_response_Gray)
-        #user_response_Gray = torchvision.transforms.Grayscale()(user_response_Gray)
-        #user_response_Gray = torchvision.transforms.ToTensor()(user_response)
-        #user_response_GrayNP = user_response_Gray.numpy()[0] 
         user_response_GrayNP = cr.resizeIm(user_response_GrayNP, 100/3)
         user_response_GrayNP = user_response_GrayNP.astype(np.float32)
         
-
         example = torchvision.transforms.ToTensor()(user_response_GrayNP)
-
-        print(example)
-        
         
         output = model(example)     #produces the output
         pred = output.data.max(1, keepdim=True)[1]    
-
         #the answer to the test
-        test_evalution = captcha(pred.item(),3)
+        test_evalution = captcha(pred.item(),3) 
 
         return jsonify(test_evalution)        
 
