@@ -171,7 +171,7 @@ myButton.onclick = function() {
 
 
 
-
+/*
 ////////////////
 // Personalized welcome message
 let myHeading = document.querySelector('h1');
@@ -192,3 +192,4 @@ if(!localStorage.getItem('name')) {
   let storedName = localStorage.getItem('name');
   myHeading.innerHTML = 'Welcome ' + storedName;
 }
+*/

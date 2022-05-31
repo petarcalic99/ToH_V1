@@ -21,7 +21,7 @@ torch.manual_seed(random_seed)
 train_loader = torch.utils.data.DataLoader(
   torchvision.datasets.MNIST(root='./data', train=True, download=True,
                              transform=torchvision.transforms.Compose([
-                               torchvision.transforms.RandomAffine(degrees = (-0,0),translate=(0,0)),  
+                               torchvision.transforms.RandomAffine(degrees = (-0,0),translate=(0.1,0.1)),  
                                torchvision.transforms.ToTensor(),
                                
                              ])),
@@ -30,7 +30,7 @@ train_loader = torch.utils.data.DataLoader(
 test_loader = torch.utils.data.DataLoader(
   torchvision.datasets.MNIST(root='./data', train=False, download=True,
                              transform=torchvision.transforms.Compose([
-                               torchvision.transforms.RandomAffine(degrees = (-0,0),translate=(0,0)),  
+                               torchvision.transforms.RandomAffine(degrees = (-0,0),translate=(0.1,0.1)),  
                                torchvision.transforms.ToTensor(),
                                
                              ])),
@@ -93,7 +93,6 @@ def test():
   test_loss /= len(test_loader.dataset)
   test_losses.append(test_loss)
   print('\nTest set: Avg. loss: {:.4f}, Accuracy: {}/{} ({:.0f}%)\n'.format(test_loss, correct, len(test_loader.dataset),100. * correct / len(test_loader.dataset)))
-
 
 
 test()
