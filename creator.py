@@ -17,7 +17,7 @@ batch_size = 25
                 # 92% to have at least 1 occurence for the batch 5x5 and only 1 good answer.
                 # A random guess has 4% chance to guess correctly
 trainSetMnist = torchvision.datasets.MNIST(root='./data', train=True, download=True, transform=transform)
-trainLoaderMnist = torch.utils.data.DataLoader(trainSetMnist, batch_size=batch_size, shuffle=False, num_workers=1)
+trainLoaderMnist = torch.utils.data.DataLoader(trainSetMnist, batch_size=batch_size, shuffle=True, num_workers=1)
 classes = ('0','1','2','3','4','5','6','7','8','9')
 
 dataIterM = iter(trainLoaderMnist)
