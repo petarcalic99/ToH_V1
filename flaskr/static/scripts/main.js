@@ -39,9 +39,15 @@ window.onload = function () {
   //to store the data
   let imagedata = context.createImageData(width, height);
 
+  //display the quesiton
+  let question = document.getElementById('question');
+
+
   function createImage() {
     //for all pixels
     myArray.then((a) => {
+      console.log(a.num)
+      question.textContent = `The Number: ${a.num}`;
       for (let x = 0; x < height; x++) {
         for (let y = 0; y < width; y++) {
           let pixelindex = (y * width + x) * 4
@@ -142,7 +148,7 @@ function clickCoord(e) {
 let myInitPost = {
   method: 'POST',
   headers: { 'Content-Type': 'application/json' },
-  body: JSON.stringify(dataSnap),
+  body: JSON.stringify(dataSnap),                       //Add the question
 };
 
 const myRequestPost = new Request('/snap_array'); //url to POST array
@@ -169,27 +175,3 @@ myButton.onclick = function () {
   console.log("upload");
 }
 
-
-
-/*
-////////////////
-// Personalized welcome message
-let myHeading = document.querySelector('h1');
-//store the name in the local storage
-function setUserName() {
-  let myName = prompt('Please enter your name.');
-  if(!myName) {
-    setUserName();
-  } else {
-    localStorage.setItem('name', myName);
-    myHeading.innerHTML = myName + ', Welcome to the Test Of Humanity';
-  }
-}
-
-if(!localStorage.getItem('name')) {
-  setUserName();
-} else {
-  let storedName = localStorage.getItem('name');
-  myHeading.innerHTML = 'Welcome ' + storedName;
-}
-*/
