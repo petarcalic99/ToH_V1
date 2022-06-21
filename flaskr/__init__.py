@@ -77,13 +77,13 @@ def create_app(test_config=None):
     @app.route('/img_array', methods = ['GET'])
     def serveArray():
         LI = cr.retImGrid()
-        return jsonify(array=LI)
+        return jsonify(array=LI)             #send question also
 
     
     
     @app.route('/snap_array', methods = ['POST'])
     def snapArray():
-        data = request.json 
+        data = request.json                  #retrieve question
         dataList = list(data['data'].values())
         datanp = np.array(dataList)
         

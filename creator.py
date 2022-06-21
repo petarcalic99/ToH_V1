@@ -9,7 +9,7 @@ import cv2
 from torchvision.transforms import ToTensor
 
 
-transform = transforms.Compose([torchvision.transforms.RandomAffine(degrees = (-0,0),translate=(0.1,0.1)),transforms.ToTensor()]) #if used makes resizing afekt more
+transform = transforms.Compose([torchvision.transforms.RandomAffine(degrees = (-0,0),translate=(0.15,0.15)),transforms.ToTensor()]) #if used makes resizing afekt more
 batch_size = 25
                 #82 % to have at least 1 occurence of the numbre X for the batch
                 # 4x4 and 1 good answer (Binomial Law). A Random response has
